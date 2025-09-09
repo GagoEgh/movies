@@ -1,0 +1,19 @@
+.movies{
+    display: flex;
+    justify-content: space-between;
+}
+
+.movies__list{
+
+}
+
+.movies__list-link{
+    
+}
+
+@media screen and (max-width: 768px){
+    .movies{
+        flex-direction: column-reverse;
+    }
+
+}

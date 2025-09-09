@@ -1,24 +1,14 @@
-import { HttpClientModule } from '@angular/common/http';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import { HttpService } from './core/services/http-service';
+import { Movies } from './features/movies/movies-component/movies-component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,HttpClientModule],
+  imports: [RouterOutlet, Movies],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App  implements OnInit{
-  private readonly httpService = inject(HttpService)
+export class App{
 
-  movies:any = [];
-
-  ngOnInit(): void {
-  }
-
-  getBackdropUrl(path: string): string {
-    return `https://image.tmdb.org/t/p/w500${path}`;
-  }
 }

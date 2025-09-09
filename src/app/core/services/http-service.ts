@@ -2,19 +2,18 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
+import { IMovie } from '../../shared/interfaces/movie.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
-  
+  private baseUrl = environment.apiUrl;
+  private apiKey = environment.apiKey;
 
   private readonly http = inject(HttpClient);
   
-  private baseUrl = environment.apiUrl;
-  private apiKey = environment.apiKey;
-  
-  public getPopularMovies(page: number = 1): Observable<{ results: any[] }> {
+  public getPopularMovies(page: number = 1): Observable<{ results: IMovie[] }> {
     const headers = { Authorization: `Bearer ${this.apiKey}` };
     const params = new HttpParams().set('language', 'ru-RU').set('page', page);
 
