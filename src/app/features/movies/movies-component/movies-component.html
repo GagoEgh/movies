@@ -1,14 +1,21 @@
 <div class="movies">
-  <div class="movies__list">
-    <nav class="movies__list-bar">
-      <a href="" class="movies__list-link movies__list-link--active">All</a>
-      <a href="" class="movies__list-link">Top</a>
-      <a href="" class="movies__list-link">Genre</a>
-      <a href="" class="movies__list-link">Now in movies</a>
-    </nav>
-
-    <movie-list class="movies__items"></movie-list>
+  <div class="movies__header">
+    <h1 class="movies__title">Каталог фильмов</h1>
+    <div class="movies__search-wrapper">
+      <move-search-icon class="movies__search-icon"></move-search-icon>
+      <input class="movies__search" placeholder="search">
+    </div>
   </div>
 
-  <movie-card class="movies__card"></movie-card>
+  <nav class='movies__controls'>
+    <div class="movies__nav">
+      <a routerLink="all" class="movies__link"  routerLinkActive="movies__link--active">All</a>
+      <a routerLink="top" class="movies__link"  routerLinkActive="movies__link--active">Top</a>
+      <a routerLink="upcoming" class="movies__link" routerLinkActive="movies__link--active">Now in movies</a>
+    </div>
+    <div>
+      <move-genre-page></move-genre-page>
+    </div>
+  </nav>
+  <router-outlet></router-outlet>
 </div>

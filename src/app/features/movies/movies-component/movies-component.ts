@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { MovieList } from '../components/movie-list/movie-list-component';
-import { MovieCard } from '../components/movie-card/movie-card-component';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { GenrePage } from '../pages/genre-page/genre-page-component';
+import { SearchIcon } from '../../../shared/ui/icons/search-icon/search-icon';
 
 @Component({
   selector: 'movies-component',
-  imports: [MovieList,MovieCard],
+  imports: [RouterOutlet,RouterLink, RouterLinkActive, GenrePage,SearchIcon],
   templateUrl: './movies-component.html',
   styleUrl: './movies-component.css'
 })
