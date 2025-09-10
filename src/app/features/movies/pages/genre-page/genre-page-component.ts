@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
+import { IGener } from '../../../../shared/interfaces/gener.interface';
+import { MovieService } from '../../../../shared/services/movie-service';
 
 @Component({
   selector: 'move-genre-page',
@@ -7,5 +9,14 @@ import { Component } from '@angular/core';
   styleUrl: './genre-page-component.css'
 })
 export class GenrePage {
+
+  private readonly movieService = inject(MovieService);
+  public  genres:IGener[]|undefined
+
+  constructor(){
+    effect(()=>{
+      this.genres = this.movieService.genres();
+    })
+  }
 
 }

@@ -1,4 +1,4 @@
-<div class="movies">
+<!-- <div class="movies">
   <div class="movies__header">
     <h1 class="movies__title">Каталог фильмов</h1>
     <div class="movies__search-wrapper">
@@ -9,13 +9,46 @@
 
   <nav class='movies__controls'>
     <div class="movies__nav">
-      <a routerLink="all" class="movies__link"  routerLinkActive="movies__link--active">All</a>
-      <a routerLink="top" class="movies__link"  routerLinkActive="movies__link--active">Top</a>
-      <a routerLink="upcoming" class="movies__link" routerLinkActive="movies__link--active">Now in movies</a>
+      <a [routerLink]="path.all" class="movies__link"  routerLinkActive="movies__link--active">All</a>
+      <a [routerLink]="path.top" class="movies__link"  routerLinkActive="movies__link--active">Top</a>
+      <a [routerLink]="path.upcoming" class="movies__link" routerLinkActive="movies__link--active">Now in movies</a>
     </div>
-    <div>
+    <div class='movies__genre'>
       <move-genre-page></move-genre-page>
     </div>
   </nav>
   <router-outlet></router-outlet>
+</div> -->
+
+
+<div class="movies">
+  <!-- Шапка -->
+  <div class="movies__header">
+    <h1 class="movies__title">Каталог фильмов</h1>
+    <div class="movies__search-wrapper">
+      <move-search-icon class="movies__search-icon"></move-search-icon>
+      <input class="movies__search" placeholder="search">
+    </div>
+  </div>
+
+  <!-- Контент + жанры -->
+  <div class="movies__body">
+    <!-- Навигация -->
+    <div class="movies__nav">
+      <a [routerLink]="path.all" class="movies__link" routerLinkActive="movies__link--active">All</a>
+      <a [routerLink]="path.top" class="movies__link" routerLinkActive="movies__link--active">Top</a>
+      <a [routerLink]="path.upcoming" class="movies__link" routerLinkActive="movies__link--active">Now in movies</a>
+    </div>
+
+    <!-- Основной контент -->
+    <div class="movies__content">
+      <router-outlet></router-outlet>
+    </div>
+
+    <!-- Блок жанров всегда виден справа -->
+    <div class="movies__genre">
+      <move-genre-page></move-genre-page>
+    </div>
+  </div>
 </div>
+

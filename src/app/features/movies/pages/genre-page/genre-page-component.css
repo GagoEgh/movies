@@ -1,0 +1,38 @@
+.genre{
+    width: 330px;
+    padding: 5px;
+    box-shadow: 1px 1px 7px 0px rgba(34, 60, 80, 0.2);
+    border-radius: 5px;
+}
+
+.genre__list{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.genre__title{
+
+}
+
+.genre__text{
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.7ms ease;
+}
+
+.genre__text:hover{
+    color: rgb(194, 191, 191);
+    transition: all 0.7ms ease;
+}
+
+@media screen and (max-width: 768px) {
+    .genre{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .genre{
+        width: 380px;
+    }
+}

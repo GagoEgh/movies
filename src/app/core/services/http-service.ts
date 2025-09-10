@@ -1,8 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { IMovie } from '../../shared/interfaces/movie.interface';
+import { IGener } from '../../shared/interfaces/gener.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,15 @@ export class HttpService {
   private apiKey = environment.apiKey;
 
   private readonly http = inject(HttpClient);
-  
-  public getPopularMovies(page: number = 1): Observable<{ results: IMovie[] }> {
+
+  public getPopularMovies(page: number = 1): Observable<IMovie[]> {
     const headers = { Authorization: `Bearer ${this.apiKey}` };
     const params = new HttpParams().set('language', 'ru-RU').set('page', page);
 
-    return this.http.get<{ results: any[] }>(`${this.baseUrl}/movie/popular`, { headers, params });
+    return(
+      this.http.get<{ results: IMovie[] }>(`${this.baseUrl}/movie/popular`, { headers, params })
+      .pipe(map(response=>response.results))
+    )
   }
 
   searchMovies(query: string, page: number = 1): Observable<{ results: any[] }> {
@@ -37,22 +41,27 @@ export class HttpService {
     return this.http.get<any>(`${this.baseUrl}/movie/${id}`, {headers, params });
   }
 
-  getCinemaNow(page:number=1){
+  getCinemaNow(page:number=1):Observable<IMovie[]>{
     const headers = { Authorization: `Bearer ${this.apiKey}`};
     const params = new HttpParams().set('language', 'ru-RU').set('page', page);
-    return this.http.get<any>(`${this.baseUrl}/movie/now_playing`,{headers,params})
+    return (this.http.get<{ results: IMovie[] }>(`${this.baseUrl}/movie/now_playing`,{headers,params})
+      .pipe(map(response=>response.results)))
   }
 
-  getTopMovies(page:number=1){
-    const headers = { Authorization: `Bearer ${this.apiKey}` };
+  getTopMovies(page:number=1):Observable<IMovie[]>{
+    const headers = { Authorization: `Bearer ${this.apiKey}`};
     const params = new HttpParams().set('language', 'ru-RU').set('page', page);
-    return this.http.get(`${this.baseUrl}/movie/top_rated`,{headers,params})
+    return this.http.get<{ results: IMovie[] }>(`${this.baseUrl}/movie/top_rated`,{headers,params})
+    .pipe(map(response=>response.results))
   }
 
-  getGenre(){
+  getGenre():Observable<IGener[]>{
     const headers = { Authorization: `Bearer ${this.apiKey}`};
     const params = new HttpParams().set('language', 'ru-RU');
-    return this.http.get<any>(`${this.baseUrl}/genre/movie/list`,{headers,params})
+    return (
+      this.http.get<{genres: IGener[] }>(`${this.baseUrl}/genre/movie/list`,{headers,params})
+      .pipe(map(response=>response.genres))
+    )
   }
 
   getWithGeners(genersId:string,page:number=1){

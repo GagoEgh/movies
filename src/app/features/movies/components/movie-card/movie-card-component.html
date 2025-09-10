@@ -1,1 +1,15 @@
-<p>movie-card works!</p>
+<div class="card">
+    <img [src]="getBackdropUrl(movie.poster_path)" alt="{{ movie.title }}" class ="card__img">
+    <p class="card__title">{{movie.title}}</p>
+
+    <div class="card__info">
+        <div class="card__genre">
+            <p>Жанр:</p>
+            <p>{{genre?.name}}</p>
+        </div>
+        <div class="card__vote">
+            <move-star-icon class="card__icon"></move-star-icon>
+            <span class="card__vote-value">{{ sliceVoteAverege() }}</span>
+        </div>
+    </div>
+</div>
