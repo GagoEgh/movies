@@ -1,0 +1,67 @@
+:root {
+  /* === Azure Palette (Primary) === */
+  --mat-azure-50:  #f0f9ff;
+  --mat-azure-100: #e0f2fe;
+  --mat-azure-200: #bae6fd;
+  --mat-azure-300: #7dd3fc;
+  --mat-azure-400: #38bdf8;
+  --mat-azure-500: #0ea5e9;
+  --mat-azure-600: #0284c7;
+  --mat-azure-700: #0369a1;
+  --mat-azure-800: #075985;
+  --mat-azure-900: #0c4a6e;
+
+  --mat-azure-a100: #e0f7ff;
+  --mat-azure-a200: #b3ecff;
+  --mat-azure-a400: #4dd8ff;
+  --mat-azure-a700: #00b8ff;
+
+  /* === Blue Palette (Tertiary) === */
+  --mat-blue-50:  #e3f2fd;
+  --mat-blue-100: #bbdefb;
+  --mat-blue-200: #90caf9;
+  --mat-blue-300: #64b5f6;
+  --mat-blue-400: #42a5f5;
+  --mat-blue-500: #2196f3;
+  --mat-blue-600: #1e88e5;
+  --mat-blue-700: #1976d2;
+  --mat-blue-800: #1565c0;
+  --mat-blue-900: #0d47a1;
+
+  --mat-blue-a100: #82b1ff;
+  --mat-blue-a200: #448aff;
+  --mat-blue-a400: #2979ff;
+  --mat-blue-a700: #2962ff;
+
+  /* === Системные цвета (M3 variables) === */
+  --mat-sys-primary: var(--mat-azure-500);
+  --mat-sys-on-primary: #ffffff;
+  --mat-sys-primary-container: var(--mat-azure-100);
+  --mat-sys-on-primary-container: #001e36;
+
+  --mat-sys-tertiary: var(--mat-blue-700);
+  --mat-sys-on-tertiary: #ffffff;
+  --mat-sys-tertiary-container: var(--mat-blue-100);
+  --mat-sys-on-tertiary-container: #00105c;
+
+  --mat-sys-surface: #ffffff;
+  --mat-sys-on-surface: #1c1b1f;
+  --mat-sys-background: #fdfcff;
+  --mat-sys-on-background: #1c1b1f;
+
+  /* === Типографика === */
+  --mat-sys-body-medium: 400 14px/20px "Roboto", "Helvetica Neue", sans-serif;
+
+  /* === Density === */
+  --mat-sys-density: 0;
+}
+
+/* Применение темы */
+body {
+  color-scheme: light;
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+  margin: 0;
+  height: 100%;
+}

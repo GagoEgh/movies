@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { GenrePage } from '../pages/genre-page/genre-page-component';
 import { SearchIcon } from '../../../shared/ui/icons/search-icon/search-icon';

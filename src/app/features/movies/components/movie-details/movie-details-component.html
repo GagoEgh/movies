@@ -1,1 +1,45 @@
-<p>movie-details works!</p>
+<mat-dialog-content>
+    <div class="details" *ngIf="data as movie">
+        <img [src]="getBackdropUrl(movie.backdrop_path)" alt="{{ movie.title }}" class ="details__img">
+
+        <p class="details__title">{{movie?.title }}</p>
+
+        <div class="details__info">
+            <div class="details__vote">
+                <div class="details__vote-item">
+                    <move-star-icon ></move-star-icon>
+                    <span class="details__vote-value">{{ sliceVoteAverege() }}</span>
+                </div>
+                <div class="details__vote-item">
+                    <p class="details__label">Количество голосов</p>
+                    <p class="details__value">{{ movie.vote_count }}</p>
+                </div>
+            </div>
+            <div class="details__genre">
+                <p class="details__label">Жанр:</p>
+                @for(genre of movie.genres;track genre.id){
+                    <p class="details__value">{{ genre?.name }},</p>
+                }
+            </div>
+            <div>
+                <p>{{movie.release_date|slice:0:4 }}</p>
+            </div>
+            <div class="details__overview">
+                <p class="details__text">{{movie.overview}}</p>
+            </div>
+
+            <div class="details__genre">
+                <p class="details__label">Производители компании:</p>
+                @for(companie of movie.production_companies;track companie.id){
+                    <p class="details__value">{{ companie?.name}},</p>
+                }
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close class="details__button">
+    Close
+  </button>
+</mat-dialog-actions>
