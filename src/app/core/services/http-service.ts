@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { debounceTime, delay, finalize, map, Observable } from 'rxjs';
+import { finalize, map, Observable } from 'rxjs';
 import { IMovie } from '../../shared/interfaces/movie.interface';
 import { IGener } from '../../shared/interfaces/gener.interface';
 
@@ -13,7 +13,6 @@ export class HttpService {
 
   private baseUrl = environment.apiUrl;
   private apiKey = environment.apiKey;
-
   private readonly http = inject(HttpClient);
 
   public getPopularMovies(page: number = 1): Observable<IMovie[]> {

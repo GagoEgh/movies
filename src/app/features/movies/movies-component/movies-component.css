@@ -97,6 +97,7 @@
 @media screen and (max-width: 768px) {
     .movies__body {
         flex-direction: column;
+        width: 735px;
     }
 
     .movies__genre {
@@ -110,6 +111,7 @@
     .movies__nav {
         flex-direction: row;
         justify-content: space-between;
+        width: 410px;
     }
 
     .movies__search {
@@ -117,13 +119,17 @@
     }
 
     .movies__title {
-        font-size: 36px;
+        font-size: 30px;
     }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 426px) {
     .movies__nav{
         justify-content: left;
         gap: 5px;
+    }
+
+    .movies__body {
+        width: 350px;
     }
 }

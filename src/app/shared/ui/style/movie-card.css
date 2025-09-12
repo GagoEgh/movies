@@ -14,6 +14,7 @@
 @media screen and (max-width: 426px) {
     .movie-card{
         grid-template-columns: repeat(2, 1fr);
-        gap:55px;
+        gap:25px;
+        padding-left: 15px;
     }
 }

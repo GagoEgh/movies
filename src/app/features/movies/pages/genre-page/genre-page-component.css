@@ -10,7 +10,7 @@
     grid-template-columns: 1fr 1fr;
 }
 
-.movies__link{
+.genres__link{
     text-align: center;
     cursor: pointer;
     transition: all 0.7ms ease;
@@ -19,12 +19,12 @@
     color: rgb(35, 34, 34);
 }
 
-.movies__link--active{
+.genres__link--active{
     color:rgb(246, 213, 26);
     border-radius: 5px;
 }
 
-.movies__link:hover{
+.genres__link:hover{
     color: rgb(194, 191, 191);
     transition: all 0.7ms ease;
 }

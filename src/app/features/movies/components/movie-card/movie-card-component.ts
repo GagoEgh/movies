@@ -24,15 +24,9 @@ export class MovieCard {
   private readonly movieService = inject(MovieService);
   private readonly httpService = inject(HttpService)
   private cdr = inject(ChangeDetectorRef);
+
   constructor(){
-    effect(()=>{
-      this.genres = this.movieService.genres();
-      if(this.genres && this.genres.length){
-       this.genre = this.genres?.find(genre=>genre.id===this.movie.genre_ids[0]);
-      }
-      this.httpService.loading();
-      this.cdr.markForCheck();
-    })
+    this.initGenersSignalEffect();
   }
 
   public openDialog() {
@@ -57,5 +51,16 @@ export class MovieCard {
   public sliceVoteAverege(){
     let voteAverage = this.movie.vote_average.toString();
     return voteAverage.slice(0,3)
+  }
+
+  private initGenersSignalEffect(){
+    effect(()=>{
+      this.genres = this.movieService.genres();
+      if(this.genres && this.genres.length){
+       this.genre = this.genres?.find(genre=>genre.id===this.movie.genre_ids[0]);
+      }
+      this.httpService.loading();
+      this.cdr.markForCheck();
+    })
   }
 }

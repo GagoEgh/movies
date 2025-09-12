@@ -12,11 +12,11 @@
       <a [routerLink]="path.top" class="movies__link" routerLinkActive="movies__link--active" (click)="deleteMovie()">Top</a>
       <a [routerLink]="path.upcoming" class="movies__link" routerLinkActive="movies__link--active" (click)="deleteMovie()">Now in movies</a>
     </div>
-    <div class="movies__content">
-      <router-outlet></router-outlet>
-    </div>
     <div class="movies__genre">
       <move-genre-page></move-genre-page>
+    </div>
+    <div class="movies__content">
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

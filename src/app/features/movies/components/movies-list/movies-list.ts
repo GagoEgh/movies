@@ -16,10 +16,13 @@ export class MoviesList{
 
   private readonly httpService = inject(HttpService);
   private readonly activatedRoute = inject(ActivatedRoute)
-  public movies$:Observable<IMovie[]>;
+  public movies$!:Observable<IMovie[]>;
   
-
   constructor(){
+    this.getMovies();
+  }
+
+  private getMovies(){
     this.movies$ = this.activatedRoute.queryParams
     .pipe(switchMap((res)=>{
       return this.httpService.searchMovies(res['key'])})

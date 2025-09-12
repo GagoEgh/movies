@@ -2,10 +2,10 @@
    <h1 class="genre__title">Жанр</h1>
    <div class="genre__list">
       @for(genre of genres; track genre.id){
-         <a class="movies__link"
+         <a class="genres__link"
             (click)="changePath()"
             [routerLink]="['/movies/genre', genre.id]"
-            routerLinkActive="movies__link--active"
+            routerLinkActive="genres__link--active"
             [routerLinkActiveOptions]="{ exact: true }">
             {{ genre.name }}
          </a>

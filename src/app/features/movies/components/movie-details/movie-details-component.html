@@ -1,9 +1,7 @@
 <mat-dialog-content>
     <div class="details" *ngIf="data as movie">
         <img [src]="getBackdropUrl(movie.backdrop_path)" alt="{{ movie.title }}" class ="details__img">
-
         <p class="details__title">{{movie?.title }}</p>
-
         <div class="details__info">
             <div class="details__vote">
                 <div class="details__vote-item">
@@ -37,7 +35,6 @@
         </div>
     </div>
 </mat-dialog-content>
-
 <mat-dialog-actions>
   <button mat-button mat-dialog-close class="details__button">
     Close

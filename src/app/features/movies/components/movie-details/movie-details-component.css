@@ -16,10 +16,6 @@
     margin: 0;
 }
 
-.details__info{
-
-}
-
 .details__genre{
     display: flex;
     flex-wrap: wrap;
