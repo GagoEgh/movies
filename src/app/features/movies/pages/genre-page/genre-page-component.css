@@ -38,5 +38,6 @@
 @media screen and (max-width: 426px) {
     .genre{
         width: 380px;
+        margin: 0 auto;
     }
 }

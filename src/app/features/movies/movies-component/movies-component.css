@@ -53,12 +53,11 @@
 
 .movies__genre{
     position: fixed;
-    top: 100px;
-    right: 25%;
-    width: 200px;
+    top: 60px;
+    right: 16%;
+    width: 335px;
     z-index: 100; 
-    background: #fff;
-    padding: 10px;
+    padding: 7px;
 }
 
 .movies__nav{
@@ -84,13 +83,13 @@
 
 @media screen and (max-width: 1440px) {
     .movies__genre{
-        right: 23%;
+        right: 13%;
     }
 }
 
 @media screen and (max-width: 1024px) {
     .movies__genre{
-        right: 13%;
+        right: 0;
     }
 }
 
@@ -131,5 +130,9 @@
 
     .movies__body {
         width: 350px;
+    }
+
+    .movies__genre {
+        width: 410px;
     }
 }
