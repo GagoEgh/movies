@@ -12,15 +12,13 @@ export class HttpService {
   public loading = signal(false);
 
   private baseUrl = environment.apiUrl;
-  private apiKey = environment.apiKey;
   private readonly http = inject(HttpClient);
 
   public getPopularMovies(page: number = 1): Observable<IMovie[]> {
     this.loading.set(true);
-    const headers = { Authorization: `Bearer ${this.apiKey}` };
-    const params = new HttpParams().set('language', 'ru-RU').set('page', page);
+    const params = new HttpParams().set('page', page);
     return(
-      this.http.get<{ results: IMovie[] }>(`${this.baseUrl}/movie/popular`, { headers, params })
+      this.http.get<{ results: IMovie[] }>(`${this.baseUrl}/movie/popular`, { params })
       .pipe(
         map(response=>response.results),
         finalize(() => this.loading.set(false))
@@ -30,13 +28,11 @@ export class HttpService {
 
   public  searchMovies(query: string, page: number = 1): Observable<IMovie[]> {
     this.loading.set(true);
-    const headers = { Authorization: `Bearer ${this.apiKey}`};
     const params = new HttpParams()
-      .set('language', 'ru-RU')
       .set('query', query)
       .set('page', page);
 
-    return this.http.get<{ results: IMovie[] }>(`${this.baseUrl}/search/movie`, {headers, params })
+    return this.http.get<{ results: IMovie[] }>(`${this.baseUrl}/search/movie`, { params })
     .pipe(
       map(response=>response.results),
       finalize(() => this.loading.set(false)));
@@ -44,18 +40,16 @@ export class HttpService {
 
   public getMovieDetails(id: number): Observable<any> {
     this.loading.set(true);
-    const headers = { Authorization: `Bearer ${this.apiKey}` };
-    const params = new HttpParams().set('language', 'ru-RU').set('id',id);
+    const params = new HttpParams().set('id',id);
 
-    return this.http.get<any>(`${this.baseUrl}/movie/${id}`, {headers, params })
+    return this.http.get<any>(`${this.baseUrl}/movie/${id}`, { params })
     .pipe(finalize(() => this.loading.set(false)))
   }
 
   public getCinemaNow(page:number=1):Observable<IMovie[]>{
     this.loading.set(true);
-    const headers = { Authorization: `Bearer ${this.apiKey}`};
-    const params = new HttpParams().set('language', 'ru-RU').set('page', page);
-    return (this.http.get<{ results: IMovie[] }>(`${this.baseUrl}/movie/now_playing`,{headers,params})
+    const params = new HttpParams().set('page', page);
+    return (this.http.get<{ results: IMovie[] }>(`${this.baseUrl}/movie/now_playing`,{params})
       .pipe(
         map(response=>response.results),
         finalize(() => this.loading.set(false))
@@ -63,29 +57,25 @@ export class HttpService {
   }
 
   public getTopMovies(page:number=1):Observable<IMovie[]>{
-    this.loading.set(true)
-    const headers = { Authorization: `Bearer ${this.apiKey}`};
-    const params = new HttpParams().set('language', 'ru-RU').set('page', page);
-    return this.http.get<{ results: IMovie[] }>(`${this.baseUrl}/movie/top_rated`,{headers,params})
+    this.loading.set(true);
+    const params = new HttpParams().set('page', page);
+    return this.http.get<{ results: IMovie[] }>(`${this.baseUrl}/movie/top_rated`,{params})
     .pipe(
       finalize(() => this.loading.set(false)),
       map(response=>response.results))
   }
 
   public getGenre():Observable<IGener[]>{
-    const headers = { Authorization: `Bearer ${this.apiKey}`};
-    const params = new HttpParams().set('language', 'ru-RU');
     return (
-      this.http.get<{genres: IGener[] }>(`${this.baseUrl}/genre/movie/list`,{headers,params})
+      this.http.get<{genres: IGener[] }>(`${this.baseUrl}/genre/movie/list`)
       .pipe(map(response=>response.genres))
     )
   }
 
   public getWithGeners(genersId:string,page:number=1){
-    this.loading.set(true)
-    const headers = { Authorization: `Bearer ${this.apiKey}`};
-    const params = new HttpParams().set('language', 'ru-RU').set('page', page).set('with_genres',genersId);
-    return this.http.get<{ results: IMovie[] }>(`${this.baseUrl}/discover/movie`,{headers,params})
+    this.loading.set(true);
+    const params = new HttpParams().set('page', page).set('with_genres',genersId);
+    return this.http.get<{ results: IMovie[] }>(`${this.baseUrl}/discover/movie`,{params})
     .pipe(
        map(response=>response.results),
         finalize(() => this.loading.set(false)))

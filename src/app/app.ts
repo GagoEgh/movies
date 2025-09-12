@@ -1,10 +1,11 @@
 import { Component, effect, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HttpService } from './core/services/http-service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [MatSnackBarModule,RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
