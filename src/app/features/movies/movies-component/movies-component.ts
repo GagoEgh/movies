@@ -1,10 +1,11 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, effect,inject } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, effect,inject } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { GenrePage } from '../pages/genre-page/genre-page-component';
 import { SearchIcon } from '../../../shared/ui/icons/search-icon/search-icon';
 import { Path } from '../../../shared/interfaces/movie.interface';
 import { HttpService } from '../../../core/services/http-service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { MovieService } from '../../../shared/services/movie-service';
 
 
 @Component({
@@ -14,9 +15,9 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './movies-component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class Movies implements AfterViewInit{
+export class Movies{
   private readonly httpService= inject(HttpService);
-
+  private readonly movieServie = inject(MovieService)
   private readonly router = inject(Router);
   private cdr = inject(ChangeDetectorRef);
 
@@ -25,16 +26,22 @@ export class Movies implements AfterViewInit{
 
 
   constructor(){
+    this.initGenreChange();
     this.initLoadingEffect();
-     this.updateActiveStyle()
-  }
-
-  ngAfterViewInit(): void {
-    // this.updateActiveStyle()
+    this.updateActiveStyle()
   }
 
   public deleteMovie(){
     this.searchControl.reset();
+  }
+
+  private initGenreChange(){
+    effect(()=>{
+     if(this.movieServie.isChangetGenre()){
+      this.searchControl.reset()
+     }
+     this.movieServie.isChangetGenre.set(false)
+    })
   }
 
   private initLoadingEffect(){

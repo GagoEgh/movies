@@ -3,6 +3,7 @@
    <div class="genre__list">
       @for(genre of genres; track genre.id){
          <a class="movies__link"
+            (click)="changePath()"
             [routerLink]="['/movies/genre', genre.id]"
             routerLinkActive="movies__link--active"
             [routerLinkActiveOptions]="{ exact: true }">

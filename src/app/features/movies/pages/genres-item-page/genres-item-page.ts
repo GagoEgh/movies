@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, effect, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpService } from '../../../../core/services/http-service';
 import { Observable, of, switchMap } from 'rxjs';
@@ -10,7 +10,7 @@ import { AsyncPipe } from '@angular/common';
   selector: 'move-genres-item-page',
   imports: [AsyncPipe,MovieCard],
   templateUrl: './genres-item-page.html',
-  styleUrl: './genres-item-page.css',
+  styleUrls: ['../../../../shared/ui/style/movie-card.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GenresItemPage {
@@ -22,14 +22,6 @@ export class GenresItemPage {
   public movies$!:Observable<IMovie[]>;
   constructor(){
     this.getMovies()
-    // this.movies$ = this.activatedRoute.paramMap
-    //   .pipe(switchMap((res)=>{
-    //     const value = res.get('id')
-    //     this.cdr.markForCheck()
-    //     return value?this.httpService.getWithGeners(value):of()
-    //   }
-    // ))
-
   }
 
   getMovies(){

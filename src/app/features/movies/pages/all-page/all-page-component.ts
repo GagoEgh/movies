@@ -9,7 +9,7 @@ import { AsyncPipe } from '@angular/common';
   selector: 'move-all-page',
   imports: [AsyncPipe,MovieCard],
   templateUrl: './all-page-component.html',
-  styleUrl: './all-page-component.css'
+  styleUrls: ['../../../../shared/ui/style/movie-card.css']
 })
 export class AllPage{
   public movies$:Observable<IMovie[]>;

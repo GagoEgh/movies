@@ -10,7 +10,7 @@ import { AsyncPipe } from '@angular/common';
   selector: 'movies-list',
   imports: [AsyncPipe,MovieCard],
   templateUrl: './movies-list.html',
-  styleUrl: './movies-list.css'
+  styleUrls: ['../../../../shared/ui/style/movie-card.css']
 })
 export class MoviesList{
 

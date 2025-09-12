@@ -9,7 +9,7 @@ import { AsyncPipe } from '@angular/common';
   selector: 'move-upcoming-movies-page',
   imports: [AsyncPipe,MovieCard],
   templateUrl: './upcoming-movies-component-page.html',
-  styleUrl: './upcoming-movies-component-page.css'
+ styleUrls: ['../../../../shared/ui/style/movie-card.css']
 })
 export class UpcomingMoviesPage {
   public movies$:Observable<IMovie[]>;
