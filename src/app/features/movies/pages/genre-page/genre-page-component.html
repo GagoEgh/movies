@@ -1,8 +1,13 @@
 <div class="genre">
    <h1 class="genre__title">Жанр</h1>
    <div class="genre__list">
-      @for(gener of genres; track gener.id){
-         <p class="genre__text">{{gener.name}}</p>
+      @for(genre of genres; track genre.id){
+         <a class="movies__link"
+            [routerLink]="['/movies/genre', genre.id]"
+            routerLinkActive="movies__link--active"
+            [routerLinkActiveOptions]="{ exact: true }">
+            {{ genre.name }}
+         </a>
       }
    </div>
 </div>

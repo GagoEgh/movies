@@ -13,7 +13,9 @@ export const routes: Routes = [
         { path: 'all', component: AllPage },
         { path: 'top', loadComponent:()=>import('./features/movies/pages/top-page/top-page-component').then(c=>c.TopPage)},
         { path: 'upcoming',loadComponent:()=>import('./features/movies/pages/upcoming-movies-page/upcoming-movies-component-page').then(c=>c.UpcomingMoviesPage)},
-        {path:'movie/:id', loadComponent:()=>import('./features/movies/components/movie-details/movie-details-component').then(c=>c.MovieDetails)}
+        
+        { path: 'search', loadComponent:()=>import('./features/movies/components/movies-list/movies-list').then(c=>c.MoviesList)},
+        {path:  'genre/:id',loadComponent:()=>import('./features/movies/pages/genres-item-page/genres-item-page').then(c=>c.GenresItemPage)}
         ]
     },
     { path: '**', component: NotFound }

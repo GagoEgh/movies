@@ -14,13 +14,22 @@
 
 }
 
-.genre__text{
+.movies__link{
     text-align: center;
     cursor: pointer;
     transition: all 0.7ms ease;
+    padding:5px 10px;
+    text-decoration: none;
+    color: rgb(35, 34, 34);
 }
 
-.genre__text:hover{
+.movies__link--active{
+    color:rgb(246, 213, 26);
+    border-radius: 5px;
+
+}
+
+.movies__link:hover{
     color: rgb(194, 191, 191);
     transition: all 0.7ms ease;
 }

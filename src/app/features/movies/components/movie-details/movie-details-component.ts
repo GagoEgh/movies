@@ -8,7 +8,6 @@ import {
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
-  MatDialogTitle
 } from '@angular/material/dialog';
 import { StarIcon } from '../../../../shared/ui/icons/star-icon/star-icon';
 import { IMovieDetails } from '../../../../shared/interfaces/movie-details.interface';

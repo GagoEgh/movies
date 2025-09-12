@@ -18,5 +18,6 @@ export interface IMovie{
 export enum Path{
     all='all',
     top='top',
-    upcoming= 'upcoming'
+    upcoming= 'upcoming',
+    search='search'
 }

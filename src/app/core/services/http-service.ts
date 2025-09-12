@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { finalize, map, Observable } from 'rxjs';
+import { debounceTime, delay, finalize, map, Observable } from 'rxjs';
 import { IMovie } from '../../shared/interfaces/movie.interface';
 import { IGener } from '../../shared/interfaces/gener.interface';
 
@@ -29,19 +29,21 @@ export class HttpService {
     )
   }
 
-  searchMovies(query: string, page: number = 1): Observable<{ results: any[] }> {
+  public  searchMovies(query: string, page: number = 1): Observable<IMovie[]> {
     this.loading.set(true);
+    const headers = { Authorization: `Bearer ${this.apiKey}`};
     const params = new HttpParams()
-      .set('api_key', this.apiKey)
       .set('language', 'ru-RU')
       .set('query', query)
       .set('page', page);
 
-    return this.http.get<{ results: any[] }>(`${this.baseUrl}/search/movie`, { params })
-    .pipe(finalize(() => this.loading.set(false)));
+    return this.http.get<{ results: IMovie[] }>(`${this.baseUrl}/search/movie`, {headers, params })
+    .pipe(
+      map(response=>response.results),
+      finalize(() => this.loading.set(false)));
   }
 
-  getMovieDetails(id: number): Observable<any> {
+  public getMovieDetails(id: number): Observable<any> {
     this.loading.set(true);
     const headers = { Authorization: `Bearer ${this.apiKey}` };
     const params = new HttpParams().set('language', 'ru-RU').set('id',id);
@@ -50,7 +52,7 @@ export class HttpService {
     .pipe(finalize(() => this.loading.set(false)))
   }
 
-  getCinemaNow(page:number=1):Observable<IMovie[]>{
+  public getCinemaNow(page:number=1):Observable<IMovie[]>{
     this.loading.set(true);
     const headers = { Authorization: `Bearer ${this.apiKey}`};
     const params = new HttpParams().set('language', 'ru-RU').set('page', page);
@@ -61,7 +63,7 @@ export class HttpService {
       ))
   }
 
-  getTopMovies(page:number=1):Observable<IMovie[]>{
+  public getTopMovies(page:number=1):Observable<IMovie[]>{
     this.loading.set(true)
     const headers = { Authorization: `Bearer ${this.apiKey}`};
     const params = new HttpParams().set('language', 'ru-RU').set('page', page);
@@ -71,7 +73,7 @@ export class HttpService {
       map(response=>response.results))
   }
 
-  getGenre():Observable<IGener[]>{
+  public getGenre():Observable<IGener[]>{
     const headers = { Authorization: `Bearer ${this.apiKey}`};
     const params = new HttpParams().set('language', 'ru-RU');
     return (
@@ -80,13 +82,14 @@ export class HttpService {
     )
   }
 
-  getWithGeners(genersId:string,page:number=1){
-    //GET https://api.themoviedb.org/3/discover/movie?api_key=YOUR_API_KEY&language=ru-RU&with_genres=28,53&page=1
+  public getWithGeners(genersId:string,page:number=1){
     this.loading.set(true)
     const headers = { Authorization: `Bearer ${this.apiKey}`};
     const params = new HttpParams().set('language', 'ru-RU').set('page', page).set('with_genres',genersId);
-    return this.http.get<any>(`${this.baseUrl}/discover/movie`,{headers,params})
-    .pipe(finalize(() => this.loading.set(false)))
+    return this.http.get<{ results: IMovie[] }>(`${this.baseUrl}/discover/movie`,{headers,params})
+    .pipe(
+       map(response=>response.results),
+        finalize(() => this.loading.set(false)))
   }
 
 }

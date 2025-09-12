@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, effect, inject } from '@angular/core';
 import { IGener } from '../../../../shared/interfaces/gener.interface';
 import { MovieService } from '../../../../shared/services/movie-service';
+import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'move-genre-page',
-  imports: [],
+  imports: [RouterLink,RouterLinkActive],
   templateUrl: './genre-page-component.html',
   styleUrl: './genre-page-component.css',
   changeDetection:ChangeDetectionStrategy.OnPush

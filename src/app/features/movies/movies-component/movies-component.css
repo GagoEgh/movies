@@ -52,14 +52,8 @@
 }
 
 .movies__genre{
-    /* z-index: 10;
-    position: absolute;
-    top:0;
-    right: 0; */
-
     position: fixed;
     top: 100px;
-    /* right: 370px;  */
     right: 25%;
     width: 200px;
     z-index: 100; 

@@ -3,22 +3,20 @@
     <h1 class="movies__title">Каталог фильмов</h1>
     <div class="movies__search-wrapper">
       <move-search-icon class="movies__search-icon"></move-search-icon>
-      <input class="movies__search" placeholder="search">
+      <input class="movies__search" [formControl]="searchControl" placeholder="Поиск фильмов">
     </div>
   </div>
   <div class="movies__body">
     <div class="movies__nav">
-      <a [routerLink]="path.all" class="movies__link" routerLinkActive="movies__link--active">All</a>
-      <a [routerLink]="path.top" class="movies__link" routerLinkActive="movies__link--active">Top</a>
-      <a [routerLink]="path.upcoming" class="movies__link" routerLinkActive="movies__link--active">Now in movies</a>
+      <a [routerLink]="path.all" class="movies__link" routerLinkActive="movies__link--active" (click)="deleteMovie()">All</a>
+      <a [routerLink]="path.top" class="movies__link" routerLinkActive="movies__link--active" (click)="deleteMovie()">Top</a>
+      <a [routerLink]="path.upcoming" class="movies__link" routerLinkActive="movies__link--active" (click)="deleteMovie()">Now in movies</a>
     </div>
     <div class="movies__content">
       <router-outlet></router-outlet>
     </div>
-
     <div class="movies__genre">
       <move-genre-page></move-genre-page>
     </div>
   </div>
 </div>
-
