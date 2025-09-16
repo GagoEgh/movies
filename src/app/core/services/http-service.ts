@@ -1,9 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { finalize, map, Observable } from 'rxjs';
+import { debounceTime, delay, finalize, map, Observable } from 'rxjs';
 import { IMovie } from '../../shared/interfaces/movie.interface';
 import { IGener } from '../../shared/interfaces/gener.interface';
+import { IMovieDetails } from '../../shared/interfaces/movie-details.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +39,7 @@ export class HttpService {
       finalize(() => this.loading.set(false)));
   }
 
-  public getMovieDetails(id: number): Observable<any> {
+  public getMovieDetails(id: number): Observable<IMovieDetails> {
     this.loading.set(true);
     const params = new HttpParams().set('id',id);
 

@@ -6,6 +6,7 @@ import { Path } from '../../../shared/interfaces/movie.interface';
 import { HttpService } from '../../../core/services/http-service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MovieService } from '../../../shared/services/movie-service';
+import { debounceTime } from 'rxjs';
 
 
 @Component({
@@ -53,6 +54,7 @@ export class Movies{
 
   private updateActiveStyle(){
     this.searchControl.valueChanges
+    .pipe(debounceTime(500))
       .subscribe((res)=>{
         if(res){
           this.router.navigate(['movies', 'search'], {
