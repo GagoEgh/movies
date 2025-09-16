@@ -1,6 +1,6 @@
-<div class="movie-card">
+<article class="movie-card">
   @for(movie of (movies$ | async);track movie.id){
     <movie-card [movie]="movie"></movie-card>
   }
-</div>
+</article>
 
