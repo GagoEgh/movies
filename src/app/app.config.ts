@@ -6,13 +6,22 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { errorInterceptor } from './core/interceptors/error-interceptor';
 import { authorizationInterceptor } from './core/interceptors/authorization-interceptor';
 import { languageInterceptor } from './core/interceptors/languaget-interceptor';
+import { provideEffects } from '@ngrx/effects';
+import { provideStore } from '@ngrx/store';
+import { metaReducers } from './store/helpers/actions-logger';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideHttpClient(withInterceptors([authorizationInterceptor,languageInterceptor,errorInterceptor])),
+    provideHttpClient(withInterceptors([authorizationInterceptor, languageInterceptor, errorInterceptor])),
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes),
-    provideHttpClient()
-  ]
+
+    // NgRx Store с metaReducers
+    // provideStore(, { metaReducers }),
+    provideStore(),
+    // NgRx Effects
+    provideEffects([]),
+]
 };
