@@ -12,6 +12,7 @@ import { metaReducers } from './store/helpers/actions-logger';
 import { loadingInterceptor } from './core/interceptors/loading-interceptor';
 import { moviesReducer } from './store/reducers/movies-reducer';
 import { PopularMoviesEffect } from './store/effects/popular-movies-effect';
+import { TopMoviesEffect } from './store/effects/top-movies-effect';
 
 
 export const appConfig: ApplicationConfig = {
@@ -21,7 +22,6 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideRouter(routes),
     provideStore({ movies: moviesReducer }, { metaReducers }),
-    // NgRx Effects
-    provideEffects([PopularMoviesEffect]),
+    provideEffects([PopularMoviesEffect,TopMoviesEffect]),
 ]
 };
