@@ -9,19 +9,19 @@ import { languageInterceptor } from './core/interceptors/languaget-interceptor';
 import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
 import { metaReducers } from './store/helpers/actions-logger';
+import { loadingInterceptor } from './core/interceptors/loading-interceptor';
+import { moviesReducer } from './store/reducers/movies-reducer';
+import { PopularMoviesEffect } from './store/effects/popular-movies-effect';
 
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideHttpClient(withInterceptors([authorizationInterceptor, languageInterceptor, errorInterceptor])),
+    provideHttpClient(withInterceptors([authorizationInterceptor, languageInterceptor, errorInterceptor, loadingInterceptor])),
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes),
-
-    // NgRx Store с metaReducers
-    // provideStore(, { metaReducers }),
-    provideStore(),
+    provideStore({ movies: moviesReducer }, { metaReducers }),
     // NgRx Effects
-    provideEffects([]),
+    provideEffects([PopularMoviesEffect]),
 ]
 };

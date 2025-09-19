@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { debounceTime, delay, finalize, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { IMovie } from '../../shared/interfaces/movie.interface';
 import { IGener } from '../../shared/interfaces/gener.interface';
 import { IMovieDetails } from '../../shared/interfaces/movie-details.interface';
@@ -16,54 +16,37 @@ export class HttpService {
   private readonly http = inject(HttpClient);
 
   public getPopularMovies(page: number = 1): Observable<IMovie[]> {
-    this.loading.set(true);
     const params = new HttpParams().set('page', page);
     return(
       this.http.get<{ results: IMovie[] }>(`${this.baseUrl}/movie/popular`, { params })
-      .pipe(
-        map(response=>response.results),
-        finalize(() => this.loading.set(false))
-      )
+      .pipe(map(response=>response.results))
     )
   }
 
   public  searchMovies(query: string, page: number = 1): Observable<IMovie[]> {
-    this.loading.set(true);
     const params = new HttpParams()
       .set('query', query)
       .set('page', page);
 
     return this.http.get<{ results: IMovie[] }>(`${this.baseUrl}/search/movie`, { params })
-    .pipe(
-      map(response=>response.results),
-      finalize(() => this.loading.set(false)));
+    .pipe(map(response=>response.results));
   }
 
   public getMovieDetails(id: number): Observable<IMovieDetails> {
-    this.loading.set(true);
     const params = new HttpParams().set('id',id);
-
     return this.http.get<any>(`${this.baseUrl}/movie/${id}`, { params })
-    .pipe(finalize(() => this.loading.set(false)))
   }
 
   public getCinemaNow(page:number=1):Observable<IMovie[]>{
-    this.loading.set(true);
     const params = new HttpParams().set('page', page);
     return (this.http.get<{ results: IMovie[] }>(`${this.baseUrl}/movie/now_playing`,{params})
-      .pipe(
-        map(response=>response.results),
-        finalize(() => this.loading.set(false))
-      ))
+      .pipe(map(response=>response.results)))
   }
 
   public getTopMovies(page:number=1):Observable<IMovie[]>{
-    this.loading.set(true);
     const params = new HttpParams().set('page', page);
     return this.http.get<{ results: IMovie[] }>(`${this.baseUrl}/movie/top_rated`,{params})
-    .pipe(
-      finalize(() => this.loading.set(false)),
-      map(response=>response.results))
+    .pipe(map(response=>response.results))
   }
 
   public getGenre():Observable<IGener[]>{
@@ -74,12 +57,9 @@ export class HttpService {
   }
 
   public getWithGeners(genersId:string,page:number=1){
-    this.loading.set(true);
     const params = new HttpParams().set('page', page).set('with_genres',genersId);
     return this.http.get<{ results: IMovie[] }>(`${this.baseUrl}/discover/movie`,{params})
-    .pipe(
-       map(response=>response.results),
-        finalize(() => this.loading.set(false)))
+    .pipe(map(response=>response.results))
   }
 
 }

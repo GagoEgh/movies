@@ -1,0 +1,8 @@
+import { createFeatureSelector, createSelector } from "@ngrx/store"
+import { IMoviesState } from "../ui/movies.state.interface"
+
+const moviesFeatureSelector = createFeatureSelector<IMoviesState>('movies')
+ export const selectPopularMovies = createSelector(
+  moviesFeatureSelector,
+  (state) => state.popularMovies
+);
