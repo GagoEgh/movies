@@ -3,9 +3,13 @@ import { IMovie } from '../../../../shared/interfaces/movie.interface';
 import { StarIcon } from '../../../../shared/ui/icons/star-icon/star-icon';
 import { IGener } from '../../../../shared/interfaces/gener.interface';
 import { MovieService } from '../../../../shared/services/movie-service';
-import { MatDialog,} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MovieDetails } from '../movie-details/movie-details-component';
 import { HttpService } from '../../../../core/services/http-service';
+import { select, Store } from '@ngrx/store';
+import { movieDetailAction } from '../../../../store/actions/movies-action';
+import { selectMovieDetail } from '../../../../store/selectors/movies-selector';
+import { filter, switchMap, take } from 'rxjs';
 
 @Component({
   selector: 'movie-card',
@@ -16,32 +20,48 @@ import { HttpService } from '../../../../core/services/http-service';
 
 })
 export class MovieCard {
-  public  genres:IGener[]|undefined;
-  public genre:IGener|undefined
-  @Input()movie!:IMovie;
-
+  private store = inject(Store);
   private readonly dialog = inject(MatDialog);
   private readonly movieService = inject(MovieService);
   private readonly httpService = inject(HttpService)
   private cdr = inject(ChangeDetectorRef);
+  
+  public  genres:IGener[]|undefined;
+  public genre:IGener|undefined
+  @Input()movie!:IMovie;
 
   constructor(){
     this.initGenersSignalEffect();
   }
 
-  public openDialog() {
-    if(this.movie){
-      this.httpService.getMovieDetails(this.movie.id)
-      .subscribe(details=>{
-        this.dialog.open(MovieDetails,{
-          data:details,
-          width: '40%',
-          height: '500px',
-          maxHeight:'600px',
-          autoFocus: true
-        });
-      })
-    }
+  public openDialog(): void {
+    if (!this.movie) return;
+
+    this.store.dispatch(
+      movieDetailAction.loadingMovieDetail({ id: this.movie.id })
+    );
+
+    this.store
+      .pipe(
+        select(selectMovieDetail),  
+        filter((details) => !!details),
+        take(1),            
+        switchMap((details) =>
+          this.dialog
+            .open(MovieDetails, {
+              data: details,
+              width: '40%',
+              height: '500px',
+              maxHeight: '600px',
+              autoFocus: true,
+            })
+            .afterClosed()
+        )
+      )
+      .subscribe(() => {
+        this.store.dispatch(movieDetailAction.movieDetailDelete());
+        this.dialog.closeAll();
+      });
   }
 
   public  getBackdropUrl(path: string): string {

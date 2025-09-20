@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpService } from '../../../../core/services/http-service';
 import { Observable, of, switchMap } from 'rxjs';
 import { IMovie } from '../../../../shared/interfaces/movie.interface';
 import { MovieCard } from '../../components/movie-card/movie-card-component';
@@ -20,12 +19,11 @@ export class GenresItemPage {
   private store = inject(Store);
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly router = inject(Router);
-  private readonly httpService = inject(HttpService);
   private cdr = inject(ChangeDetectorRef);
 
   public movies$!:Observable<IMovie[]>;
   constructor(){
-    this.getMovies()
+    this.getMovies();
   }
 
   getMovies(){

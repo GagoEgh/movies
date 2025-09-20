@@ -26,3 +26,8 @@ export const selectGenreItem = createSelector(
   moviesFeatureSelector,
   (state)=>state.genreItem
 )
+
+export const selectMovieDetail = createSelector(
+  moviesFeatureSelector,
+  (state)=>state.movieDetail
+)
