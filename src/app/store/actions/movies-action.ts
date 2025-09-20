@@ -11,3 +11,8 @@ export const topMoviesAction = {
     loadingTopMovies: createAction(Movies.TOP_MOVIES_START, props<{page:number}>()),
     topMoviesLoaded: createAction(Movies.TOP_MOVIES_SUCCESS, props<{movies:IMovie[]}>())
 }
+
+export const nowMoviesAction = {
+    loadingNewMovies: createAction(Movies.NOW_MOVIES_START, props<{page:number}>()),
+    nowMoviesLoaded: createAction(Movies.NOW_MOVIES_SUCCESS, props<{movies:IMovie[]}>())
+}

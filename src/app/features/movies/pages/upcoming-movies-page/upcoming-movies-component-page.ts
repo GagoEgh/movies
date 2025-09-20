@@ -1,9 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { IMovie } from '../../../../shared/interfaces/movie.interface';
 import { MovieCard } from '../../components/movie-card/movie-card-component';
-import { HttpService } from '../../../../core/services/http-service';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { select, Store } from '@ngrx/store';
+import { nowMoviesAction } from '../../../../store/actions/movies-action';
+import { selectNowMovies } from '../../../../store/selectors/movies-selector';
 
 @Component({
   selector: 'move-upcoming-movies-page',
@@ -12,11 +14,12 @@ import { AsyncPipe } from '@angular/common';
  styleUrls: ['../../../../shared/ui/style/movie-card.css']
 })
 export class UpcomingMoviesPage {
+  private store = inject(Store)
   public movies$:Observable<IMovie[]>;
-  private readonly httpService = inject(HttpService);
 
   constructor(){
-   this.movies$ = this.httpService.getCinemaNow();
+    this.store.dispatch(nowMoviesAction.loadingNewMovies({page:1}));
+    this.movies$ = this.store.pipe(select(selectNowMovies));
   }
 
 }

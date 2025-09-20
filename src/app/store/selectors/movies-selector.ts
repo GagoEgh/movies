@@ -11,3 +11,8 @@ export const selectTopMovies = createSelector(
   moviesFeatureSelector,
   (state)=> state.topMovies
 )
+
+export const selectNowMovies = createSelector(
+  moviesFeatureSelector,
+  (state)=>state.nowMovies
+)

@@ -1,6 +1,8 @@
 export enum Movies{
    POPULAR_MOVIES_START = '[POPULAR START] Popular Start',
    POPULAR_MOVIES_SUCCESS = '[POPULAR SUCCESS] Popular Success',
-   TOP_MOVIES_START = '[TOP START] TOP Start',
-   TOP_MOVIES_SUCCESS = '[TOP SUCCESS] TOP Success',
+   TOP_MOVIES_START = '[TOP START] Top Start',
+   TOP_MOVIES_SUCCESS = '[TOP SUCCESS] Top Success',
+   NOW_MOVIES_START = '[NOW START] Now Start',
+   NOW_MOVIES_SUCCESS = '[NOW SUCCESS] Now Success',
 }
