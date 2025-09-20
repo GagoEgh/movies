@@ -79,7 +79,11 @@
     border-radius: 5px;
 }
 
-
+@media screen and (max-width: 2560px) {
+    .movies__genre{
+        right: 30%;
+    }
+}
 
 @media screen and (max-width: 1440px) {
     .movies__genre{

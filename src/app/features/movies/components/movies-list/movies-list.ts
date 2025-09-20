@@ -1,10 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { IMovie } from '../../../../shared/interfaces/movie.interface';
 import { MovieCard } from '../movie-card/movie-card-component';
-import { HttpService } from '../../../../core/services/http-service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { select, Store } from '@ngrx/store';
+import { searchMoviesAction } from '../../../../store/actions/movies-action';
+import { selectSearchMovies } from '../../../../store/selectors/movies-selector';
 
 @Component({
   selector: 'movies-list',
@@ -13,8 +15,7 @@ import { AsyncPipe } from '@angular/common';
   styleUrls: ['../../../../shared/ui/style/movie-card.css']
 })
 export class MoviesList{
-
-  private readonly httpService = inject(HttpService);
+  private store = inject(Store);
   private readonly activatedRoute = inject(ActivatedRoute)
   public movies$!:Observable<IMovie[]>;
   
@@ -24,8 +25,10 @@ export class MoviesList{
 
   private getMovies(){
     this.movies$ = this.activatedRoute.queryParams
-    .pipe(switchMap((res)=>{
-      return this.httpService.searchMovies(res['key'])})
-    )
+    .pipe(
+      switchMap((res)=>{
+      this.store.dispatch(searchMoviesAction.loadingSearchMovies({query:res['key'],page:1}));
+      return this.store.pipe(select(selectSearchMovies))
+    }))
   }
 }

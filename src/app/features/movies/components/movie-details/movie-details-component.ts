@@ -5,6 +5,7 @@ import {MatButtonModule} from '@angular/material/button';
 
 import { 
   MAT_DIALOG_DATA,
+  MatDialog,
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
@@ -30,7 +31,7 @@ import { NgIf, SlicePipe } from '@angular/common';
   styleUrl: './movie-details-component.css'
 })
 export class MovieDetails {
- 
+  private readonly dialog = inject(MatDialog);
   public data = inject<IMovieDetails>(MAT_DIALOG_DATA);
   public  getBackdropUrl(path: string): string {
     return `https://image.tmdb.org/t/p/w500${path}`;
@@ -40,4 +41,5 @@ export class MovieDetails {
     let voteAverage = this.data.vote_average.toString();
     return voteAverage.slice(0,3)
   }
+
 }
