@@ -8,5 +8,6 @@ export interface IMoviesState {
   nowMovies:IMovie[],
   genre:IGener[],
   genreItem:IMovie[],
-  movieDetail:IMovieDetails|null
+  movieDetail:IMovieDetails|null,
+  searchMovies:IMovie[]
 }

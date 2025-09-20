@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { genreItemMoviesAction, genreMoviesAction, movieDetailAction, nowMoviesAction, popularMoviesAction, topMoviesAction } from "../actions/movies-action";
+import { genreItemMoviesAction, genreMoviesAction, movieDetailAction, nowMoviesAction, popularMoviesAction, searchMoviesAction, topMoviesAction } from "../actions/movies-action";
 import { IMoviesState } from "../ui/movies.state.interface";
 
 const initialState:IMoviesState ={
@@ -8,7 +8,8 @@ const initialState:IMoviesState ={
  nowMovies:[],
  genre:[],
  genreItem:[],
- movieDetail:null
+ movieDetail:null,
+ searchMovies:[]
 }
 
 export const moviesReducer = createReducer(
@@ -25,5 +26,8 @@ export const moviesReducer = createReducer(
     on(genreItemMoviesAction.genreItemLoaded,(state,{movies})=>({...state,genreItem:movies})),
     on(movieDetailAction.loadingMovieDetail,(state)=>state),
     on(movieDetailAction.movieDetailLoaded,(state,{movieDetail})=>({...state,movieDetail:movieDetail})),
-    on(movieDetailAction.movieDetailDelete,(state)=>({...state,movieDetail:null}))
+    on(movieDetailAction.movieDetailDelete,(state)=>({...state,movieDetail:null})),
+    on(searchMoviesAction.loadingSearchMovies,(state=>state)),
+    on(searchMoviesAction.searchMoviesLoaded,(state,{movies})=>({...state,searchMovies:movies})),
+    on(searchMoviesAction.searchMoviesCleare,(state)=>({...state,searchMovies:[]}))
 );

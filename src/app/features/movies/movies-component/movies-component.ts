@@ -7,6 +7,8 @@ import { HttpService } from '../../../core/services/http-service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MovieService } from '../../../shared/services/movie-service';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { searchMoviesAction } from '../../../store/actions/movies-action';
 
 
 @Component({
@@ -20,6 +22,7 @@ export class Movies{
   private readonly httpService= inject(HttpService);
   private readonly movieServie = inject(MovieService)
   private readonly router = inject(Router);
+  private store = inject(Store);
   private cdr = inject(ChangeDetectorRef);
 
   public readonly path = Path;
@@ -34,12 +37,14 @@ export class Movies{
 
   public deleteMovie(){
     this.searchControl.reset();
+    this.store.dispatch(searchMoviesAction.searchMoviesCleare());
   }
 
   private initGenreChange(){
     effect(()=>{
      if(this.movieServie.isChangetGenre()){
-      this.searchControl.reset()
+      this.searchControl.reset();
+      this.store.dispatch(searchMoviesAction.searchMoviesCleare());
      }
      this.movieServie.isChangetGenre.set(false)
     })

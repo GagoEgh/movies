@@ -31,3 +31,8 @@ export const selectMovieDetail = createSelector(
   moviesFeatureSelector,
   (state)=>state.movieDetail
 )
+
+export const selectSearchMovies = createSelector(
+  moviesFeatureSelector,
+  (state)=>state.searchMovies
+)

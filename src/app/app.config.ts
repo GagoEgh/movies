@@ -17,16 +17,28 @@ import { NowMoviesEffect } from './store/effects/now-movies-effects';
 import { GenreEffect } from './store/effects/genre-effect';
 import { GenreItemEffect } from './store/effects/genre-item-effect';
 import { MovieDetailEffect } from './store/effects/movie-detail-effect';
+import { SearchMoviesEffect } from './store/effects/search-movies-effect';
 
 
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideHttpClient(withInterceptors([authorizationInterceptor, languageInterceptor, errorInterceptor, loadingInterceptor])),
+    provideHttpClient(withInterceptors([
+      authorizationInterceptor, 
+      languageInterceptor, 
+      errorInterceptor, 
+      loadingInterceptor])),
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes),
     provideStore({ movies: moviesReducer }, { metaReducers }),
-    provideEffects([PopularMoviesEffect,TopMoviesEffect,NowMoviesEffect,GenreEffect,GenreItemEffect,MovieDetailEffect]),
+    provideEffects([
+      PopularMoviesEffect,
+      TopMoviesEffect,
+      NowMoviesEffect,
+      GenreEffect,
+      GenreItemEffect,
+      MovieDetailEffect,
+      SearchMoviesEffect]),
 ]
 };

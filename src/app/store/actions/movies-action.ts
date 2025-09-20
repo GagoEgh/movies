@@ -34,3 +34,9 @@ export const movieDetailAction = {
     movieDetailLoaded:createAction(Movies.MOVIE_DETAIL_MOVIES_SUCCESS,props<{movieDetail:IMovieDetails}>()),
     movieDetailDelete:createAction(Movies.MOVIE_DETAIL_MOVIES_DELETE)
 }
+
+export const searchMoviesAction = {
+    loadingSearchMovies:createAction(Movies.SEARCH_MOVIES_START,props<{query: string, page: number}>()),
+    searchMoviesLoaded:createAction(Movies.SEARCH_MOVIES_SUCCESS,props<{movies:IMovie[]}>()),
+    searchMoviesCleare:createAction(Movies.SEARCH_MOVIES_CLEARE)
+}
