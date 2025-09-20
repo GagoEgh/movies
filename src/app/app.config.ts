@@ -14,6 +14,8 @@ import { moviesReducer } from './store/reducers/movies-reducer';
 import { PopularMoviesEffect } from './store/effects/popular-movies-effect';
 import { TopMoviesEffect } from './store/effects/top-movies-effect';
 import { NowMoviesEffect } from './store/effects/now-movies-effects';
+import { GenreEffect } from './store/effects/genre-effect';
+import { GenreItemEffect } from './store/effects/genre-item-effect';
 
 
 export const appConfig: ApplicationConfig = {
@@ -23,6 +25,6 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideRouter(routes),
     provideStore({ movies: moviesReducer }, { metaReducers }),
-    provideEffects([PopularMoviesEffect,TopMoviesEffect,NowMoviesEffect]),
+    provideEffects([PopularMoviesEffect,TopMoviesEffect,NowMoviesEffect,GenreEffect,GenreItemEffect]),
 ]
 };

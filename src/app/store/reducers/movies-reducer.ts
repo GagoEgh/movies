@@ -1,11 +1,13 @@
 import { createReducer, on } from "@ngrx/store";
-import { nowMoviesAction, popularMoviesAction, topMoviesAction } from "../actions/movies-action";
+import { genreItemMoviesAction, genreMoviesAction, nowMoviesAction, popularMoviesAction, topMoviesAction } from "../actions/movies-action";
 import { IMoviesState } from "../ui/movies.state.interface";
 
 const initialState:IMoviesState ={
  popularMovies: [],
  topMovies:[],
- nowMovies:[]
+ nowMovies:[],
+ genre:[],
+ genreItem:[]
 }
 
 export const moviesReducer = createReducer(
@@ -15,5 +17,9 @@ export const moviesReducer = createReducer(
     on(topMoviesAction.loadingTopMovies,(state=>state)),
     on(topMoviesAction.topMoviesLoaded,(state,{movies})=>({...state,topMovies:movies})),
     on(nowMoviesAction.loadingNewMovies,(state=>state)),
-    on(nowMoviesAction.nowMoviesLoaded,(state,{movies})=>({...state,nowMovies:movies}))
+    on(nowMoviesAction.nowMoviesLoaded,(state,{movies})=>({...state,nowMovies:movies})),
+    on(genreMoviesAction.loadingGenre,(state=>state)),
+    on(genreMoviesAction.genreLoaded,(state,{genre})=>({...state,genre})),
+    on(genreItemMoviesAction.loadingGenreItem,(state=>state)),
+    on(genreItemMoviesAction.genreItemLoaded,(state,{movies})=>({...state,genreItem:movies}))
 );

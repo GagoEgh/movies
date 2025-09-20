@@ -5,4 +5,9 @@ export enum Movies{
    TOP_MOVIES_SUCCESS = '[TOP SUCCESS] Top Success',
    NOW_MOVIES_START = '[NOW START] Now Start',
    NOW_MOVIES_SUCCESS = '[NOW SUCCESS] Now Success',
+   GENRE_MOVIES_START = '[GENTE START] Genre Start',
+   GENRE_MOVIES_SUCCESS = '[GENTE SUCCESS] Genre Success',
+
+   GENRE_ITEM_MOVIES_START = '[GENTE_ITEM START] Genre_Item Start',
+   GENRE_ITEM_MOVIES_SUCCESS = '[GENTE_ITEM SUCCESS] Genre_Item Success',
 }

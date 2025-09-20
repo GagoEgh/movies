@@ -56,7 +56,7 @@ export class HttpService {
     )
   }
 
-  public getWithGeners(genersId:string,page:number=1){
+  public getWithGeners(genersId:string,page:number=1):Observable<IMovie[]>{
     const params = new HttpParams().set('page', page).set('with_genres',genersId);
     return this.http.get<{ results: IMovie[] }>(`${this.baseUrl}/discover/movie`,{params})
     .pipe(map(response=>response.results))

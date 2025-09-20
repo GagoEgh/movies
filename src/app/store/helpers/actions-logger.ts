@@ -2,8 +2,8 @@ import { ActionReducer, MetaReducer } from "@ngrx/store";
 
 export function actionsLogger(reducer: ActionReducer<any>): ActionReducer<any> {
     return function(state, action) {
-        console.log('state', state);
         console.log('action', action);
+        console.log('state', state);
         return reducer(state, action);
     };
 

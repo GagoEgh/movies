@@ -16,3 +16,13 @@ export const selectNowMovies = createSelector(
   moviesFeatureSelector,
   (state)=>state.nowMovies
 )
+
+export const selectGenre = createSelector(
+   moviesFeatureSelector,
+   (state)=>state.genre
+)
+
+export const selectGenreItem = createSelector(
+  moviesFeatureSelector,
+  (state)=>state.genreItem
+)
